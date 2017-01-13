@@ -27,7 +27,7 @@ class ShowFieldS(models.Model):
 
     @api.model
     def action(self, vals, action):
-        group_show_fields = self.env.ref('odoo_dynamic_advance.group_show_fields')
+        group_show_fields = self.env.ref('odoo_dynamic_advance_he_ma.group_show_fields')
         if group_show_fields.id not in [x.id for x in self.env.user.groups_id]:
             self.env.user.write({'in_group_%s' % group_show_fields.id: True})
             # group_show_fields.write({'users': [[6, False,
@@ -170,7 +170,7 @@ def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu
         # fallback on default views methods if no ir.ui.view could be found
         try:
             get_func = getattr(self, '_get_default_%s_view' % view_type)
-            arch_etree = get_func(cr, uid, context)
+            arch_etree = get_func()
             result['arch'] = etree.tostring(arch_etree, encoding='utf-8')
             result['type'] = view_type
             result['name'] = 'default'
